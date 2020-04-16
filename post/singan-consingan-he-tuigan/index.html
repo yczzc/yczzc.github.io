@@ -1,21 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://yczzc.github.io</id>
-    <title>yczzc</title>
-    <updated>2020-04-16T10:55:42.471Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://yczzc.github.io"/>
-    <link rel="self" href="https://yczzc.github.io/atom.xml"/>
-    <logo>https://yczzc.github.io/images/avatar.png</logo>
-    <icon>https://yczzc.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, yczzc</rights>
-    <entry>
-        <title type="html"><![CDATA[SinGAN  ConSinGAN 和 TuiGAN]]></title>
-        <id>https://yczzc.github.io/post/singan-consingan-he-tuigan/</id>
-        <link href="https://yczzc.github.io/post/singan-consingan-he-tuigan/">
-        </link>
-        <updated>2020-04-16T09:21:37.000Z</updated>
-        <content type="html"><![CDATA[<p><strong>SinGAN</strong><br>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>SinGAN  ConSinGAN 和 TuiGAN | yczzc</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://yczzc.github.io/favicon.ico?v=1587034535623">
+<link rel="stylesheet" href="https://yczzc.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="SinGAN
+Technion和Google提出的&quot;SinGAN: Learning a Generative Model from a Single Natural Image&quot;（2019 ICCV的最佳论文）论文链接..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://yczzc.github.io">
+        <img src="https://yczzc.github.io/images/avatar.png?v=1587034535623" class="site-logo">
+        <h1 class="site-title">yczzc</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://yczzc.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">SinGAN  ConSinGAN 和 TuiGAN</h2>
+            <div class="post-date">2020-04-16</div>
+            
+            <div class="post-content" v-pre>
+              <p><strong>SinGAN</strong><br>
 Technion和Google提出的&quot;SinGAN: Learning a Generative Model from a Single Natural Image&quot;（2019 ICCV的最佳论文）<a href="https://arxiv.org/pdf/1905.01164.pdf">论文链接</a>  <a href="https://www.youtube.com/watch?v=mdAcPe74tZI&amp;feature=youtu.be&amp;t=3217">视频链接</a>，是第一个拿单张图像进行训练的非条件生成网络。<br>
 效果如下：（最左侧一列是训练图像，右侧几列是生成图像）<br>
 <img src="https://yczzc.github.io/post-images/1587030102750.png" alt="" loading="lazy"><br>
@@ -43,6 +105,37 @@ TuiGAN<a href="https://arxiv.xilesou.top/pdf/2004.04634.pdf">论文链接</a>研
 <li>https://zhuanlan.zhihu.com/p/120846837</li>
 <li>https://zhuanlan.zhihu.com/p/129045166</li>
 </ol>
-]]></content>
-    </entry>
-</feed>
+
+            </div>
+            
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
