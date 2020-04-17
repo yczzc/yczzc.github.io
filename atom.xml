@@ -2,13 +2,42 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yczzc.github.io</id>
     <title>yczzc</title>
-    <updated>2020-04-17T10:40:09.076Z</updated>
+    <updated>2020-04-17T15:53:27.786Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yczzc.github.io"/>
     <link rel="self" href="https://yczzc.github.io/atom.xml"/>
     <logo>https://yczzc.github.io/images/avatar.png</logo>
     <icon>https://yczzc.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, yczzc</rights>
+    <entry>
+        <title type="html"><![CDATA[Capsule Network]]></title>
+        <id>https://yczzc.github.io/post/capsule-network/</id>
+        <link href="https://yczzc.github.io/post/capsule-network/">
+        </link>
+        <updated>2020-04-17T14:33:06.000Z</updated>
+        <content type="html"><![CDATA[<p>Hinton最初在2011年就提出了胶囊网络概念，他认为CNN不符合生物神经系统，并且有很大的局限。</p>
+<p>CNN能很好的理解局部信息，随着层数增加导致感受野增大，能够有很好的大局观。但是Hinton认为CNN是不太正确的，原因如下：</p>
+<ol>
+<li>生物视觉神经系统虽然是分层的，但是层数不多，远远低于现在常用CNN的层数；</li>
+<li>在生物神经网络中，不会有BP机制；</li>
+<li>人类会根据物体形状建立一种坐标框架(coordinate frame)，坐标框架作为一种先验知识，能够帮助人类理解不同方向的同一物体；而CNN的下采样丢弃了这一先验知识，从而只能处理不变性(Invariance)的问题（不变性是指物体本身不发生任何变化），无法处理同变性(Equivariance)的问题（同变性指物体可以发生变化，但变化后仍是这种物体）；我们希望CNN能够像人类一样理解图像，产生通用的图像表征，再用这个表征做任务驱动的任务，如分类、分割等等。而不是仅仅提高准确率。<br>
+<img src="https://yczzc.github.io/post-images/1587135943123.png" alt="" loading="lazy"></li>
+</ol>
+<p>在哺乳动物大脑中存在大量皮层微柱(Cortical minicolumn)，其内部含有上百个神经元，并存在内部分层。这意味着人脑中的一层并不是类似现在NN的一层，而是有复杂的内部结构。于是Hinton提出了一个相应的结构，称为capsule，每一个capsule由多个神经元组成。</p>
+<p><strong>Dynamic Routing Between Capsules (2017)</strong> <a href="https://arxiv.org/pdf/1710.09829v2.pdf">链接</a><br>
+这篇论文中阐述，CapsuleNet输出向量的模长为出现的概率，因此采用squash函数作为激活函数，将输出向量的模长限制在[0, 1]；输出向量的方向表示图像性质实例化参数。<br>
+算法步骤如下:（u表示上一层所有capsule的输出）<br>
+<img src="https://yczzc.github.io/post-images/1587137648694.png" alt="" loading="lazy"><br>
+<img src="https://yczzc.github.io/post-images/1587138556129.png" alt="" loading="lazy"></p>
+<p>未完……</p>
+<p>参考：</p>
+<ol>
+<li>https://arxiv.org/pdf/1710.09829v2.pdf</li>
+<li>https://www.jiqizhixin.com/articles/capsule-implement-sara-sabour-Feb02</li>
+<li>https://zhuanlan.zhihu.com/p/29435406</li>
+</ol>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[[论文] EGOCENTRIC SPATIAL MEMORY NETWORK]]></title>
         <id>https://yczzc.github.io/post/egocentric-spatial-memory-network/</id>
