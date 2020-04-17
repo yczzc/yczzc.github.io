@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yczzc.github.io</id>
     <title>yczzc</title>
-    <updated>2020-04-17T15:54:40.032Z</updated>
+    <updated>2020-04-17T15:59:20.683Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yczzc.github.io"/>
     <link rel="self" href="https://yczzc.github.io/atom.xml"/>
@@ -29,7 +29,8 @@
 算法步骤如下:（u表示上一层所有capsule的输出）<br>
 <img src="https://yczzc.github.io/post-images/1587137648694.png" alt="" loading="lazy"><br>
 <img src="https://yczzc.github.io/post-images/1587138556129.png" alt="" loading="lazy"></p>
-<p>未完……</p>
+<p><strong>Matrix Capsules with EM routing (2018)</strong><a href="https://openreview.net/pdf?id=HJWLfGWRb">链接</a><br>
+未完……</p>
 <p>参考：</p>
 <ol>
 <li>https://arxiv.org/pdf/1710.09829v2.pdf</li>
