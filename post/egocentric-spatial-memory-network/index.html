@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>EGOCENTRIC SPATIAL MEMORY NETWORK | yczzc</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://yczzc.github.io/favicon.ico?v=1587088986779">
+<link rel="stylesheet" href="https://yczzc.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="整理资料的时候发现了这篇很有意思的论文链接。本文利用第一视角图像建模空间信息，估计智能体的运动信息并且建立一个自上而下的全局地图，完成导航任务。此外还利用了神经科学的研究成果，模拟人脑在建立全局图(top-down global maps)..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://yczzc.github.io">
+        <img src="https://yczzc.github.io/images/avatar.png?v=1587088986779" class="site-logo">
+        <h1 class="site-title">yczzc</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://yczzc.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">EGOCENTRIC SPATIAL MEMORY NETWORK</h2>
+            <div class="post-date">2020-04-17</div>
+            
+            <div class="post-content" v-pre>
+              <p>整理资料的时候发现了这篇很有意思的论文<a href="https://openreview.net/pdf?id=SkmM6M_pW">链接</a>。本文利用第一视角图像建模空间信息，估计智能体的运动信息并且建立一个自上而下的全局地图，完成导航任务。此外还利用了神经科学的研究成果，模拟人脑在建立全局图(top-down global maps)方面的工作原理。</p>
+<p>论文首先介绍了神经科学的研究成果，人脑建立自上而下的全局地图需要四种细胞：head-direction cells(HDC), border and boundary vector cells(BVC), place cells(PC), grid cell(GC)，它们的功能分别是判别方向、判别边界、判别位置和将空间网格化(a grid cross the enviroment)。</p>
+<p>基于人脑神经系统建立模型，模型包括Head Direction Unit(HDU), Boundary Vector Unit(BVU), Place Unit(PU), Grid Unit(GU)四部分。<br>
+<img src="https://yczzc.github.io/post-images/1587086393761.png" alt="" loading="lazy"><br>
+HDU利用2D-CNN在每一个时间点从动作空间学得运动信息，最小化分类损失函数。输入为RGB camera拍摄的图像。<br>
+BVU通过2D-CNN和卷积逆置将第一视角图像转换成top-down局部地图。<br>
+PU最小化分类损失函数，判别是否有loop closure。<br>
+GU整合BVU生成的top-down局部地图，并记录所有经过的位置。在GU中，加入了门机制(gating mechanism)，用以判断是否陷入loop closure，降低了长期mapping产生的累计误差。<br>
+<img src="https://yczzc.github.io/post-images/1587087326819.png" alt="" loading="lazy"></p>
+<p>在训练时，分别单独训练每一个模块，训练好之后，将各个模块整合在一起并微调。</p>
+<p>参考：</p>
+<ol>
+<li>https://openreview.net/pdf?id=SkmM6M_pW</li>
+</ol>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://yczzc.github.io/post/singan-consingan-he-tuigan/">
+                  <h3 class="post-title">
+                    SinGAN  ConSinGAN 和 TuiGAN
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

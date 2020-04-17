@@ -2,13 +2,35 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yczzc.github.io</id>
     <title>yczzc</title>
-    <updated>2020-04-16T10:55:42.471Z</updated>
+    <updated>2020-04-17T02:03:10.627Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yczzc.github.io"/>
     <link rel="self" href="https://yczzc.github.io/atom.xml"/>
     <logo>https://yczzc.github.io/images/avatar.png</logo>
     <icon>https://yczzc.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, yczzc</rights>
+    <entry>
+        <title type="html"><![CDATA[EGOCENTRIC SPATIAL MEMORY NETWORK]]></title>
+        <id>https://yczzc.github.io/post/egocentric-spatial-memory-network/</id>
+        <link href="https://yczzc.github.io/post/egocentric-spatial-memory-network/">
+        </link>
+        <updated>2020-04-17T00:45:07.000Z</updated>
+        <content type="html"><![CDATA[<p>整理资料的时候发现了这篇很有意思的论文<a href="https://openreview.net/pdf?id=SkmM6M_pW">链接</a>。本文利用第一视角图像建模空间信息，估计智能体的运动信息并且建立一个自上而下的全局地图，完成导航任务。此外还利用了神经科学的研究成果，模拟人脑在建立全局图(top-down global maps)方面的工作原理。</p>
+<p>论文首先介绍了神经科学的研究成果，人脑建立自上而下的全局地图需要四种细胞：head-direction cells(HDC), border and boundary vector cells(BVC), place cells(PC), grid cell(GC)，它们的功能分别是判别方向、判别边界、判别位置和将空间网格化(a grid cross the enviroment)。</p>
+<p>基于人脑神经系统建立模型，模型包括Head Direction Unit(HDU), Boundary Vector Unit(BVU), Place Unit(PU), Grid Unit(GU)四部分。<br>
+<img src="https://yczzc.github.io/post-images/1587086393761.png" alt="" loading="lazy"><br>
+HDU利用2D-CNN在每一个时间点从动作空间学得运动信息，最小化分类损失函数。输入为RGB camera拍摄的图像。<br>
+BVU通过2D-CNN和卷积逆置将第一视角图像转换成top-down局部地图。<br>
+PU最小化分类损失函数，判别是否有loop closure。<br>
+GU整合BVU生成的top-down局部地图，并记录所有经过的位置。在GU中，加入了门机制(gating mechanism)，用以判断是否陷入loop closure，降低了长期mapping产生的累计误差。<br>
+<img src="https://yczzc.github.io/post-images/1587087326819.png" alt="" loading="lazy"></p>
+<p>在训练时，分别单独训练每一个模块，训练好之后，将各个模块整合在一起并微调。</p>
+<p>参考：</p>
+<ol>
+<li>https://openreview.net/pdf?id=SkmM6M_pW</li>
+</ol>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[SinGAN  ConSinGAN 和 TuiGAN]]></title>
         <id>https://yczzc.github.io/post/singan-consingan-he-tuigan/</id>
