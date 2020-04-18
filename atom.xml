@@ -2,13 +2,59 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yczzc.github.io</id>
     <title>yczzc</title>
-    <updated>2020-04-17T15:59:20.683Z</updated>
+    <updated>2020-04-18T09:43:18.707Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yczzc.github.io"/>
     <link rel="self" href="https://yczzc.github.io/atom.xml"/>
     <logo>https://yczzc.github.io/images/avatar.png</logo>
     <icon>https://yczzc.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, yczzc</rights>
+    <entry>
+        <title type="html"><![CDATA[ConvLSTM PredRNN 和 PredRNN++]]></title>
+        <id>https://yczzc.github.io/post/convlstm-predrnn-he-predrnn/</id>
+        <link href="https://yczzc.github.io/post/convlstm-predrnn-he-predrnn/">
+        </link>
+        <updated>2020-04-18T08:29:28.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting</strong><a href="https://arxiv.org/pdf/1506.04214.pdf">链接</a><br>
+ConvLSTM是2015 NIPS上的论文，研究的问题是降雨预测。<br>
+降雨预测问题是一个时空序列问题，与当前空间信息有关，也和历史信息有关；因此，作者用卷积运算代替Vanilla LSTM(FC-LSTM)中的普通点积；</p>
+<p>FC-LSTM的公式化形式：<br>
+<img src="https://yczzc.github.io/post-images/1587198913771.png" alt="" loading="lazy"></p>
+<p>ConvLSTM的公式化形式（*表示卷积运算）：<br>
+<img src="https://yczzc.github.io/post-images/1587198953111.png" alt="" loading="lazy"></p>
+<p>此外，论文中采用Encoding-Forecasting Structure将多层ConvLSTM堆叠：<br>
+<img src="https://yczzc.github.io/post-images/1587199798278.png" alt="" loading="lazy"><br>
+在Encoding-Forecasting Structure中，预测网络的h和c取自编码网络最后一个状态；为了保证预测值和输入值维度相同，将预测网络所有状态concatenate后会有一个1*1卷积的操作。</p>
+<p><strong>PredRNN: Recurrent Neural Networks for Predictive Learning using Spatiotemporal LSTMs</strong><a href="https://papers.nips.cc/paper/6689-predrnn-recurrent-neural-networks-for-predictive-learning-using-spatiotemporal-lstms.pdf">链接</a><br>
+PredRNN是2017 NIPS的论文，提出了处理时空信息的 Spatiotemporal LSTM。<br>
+作者认为时空记忆信息(memory states)不应该仅限于cell，提出用多层的结构学得memory<br>
+states。</p>
+<p>作者认为ConvLSTM中的多层结构编码了空间信息，但是导致每一层的cell相互独立，因此下一个时间点最底层ConvLSTM的输入不会考虑上一个时间点最高层ConvLSTM的输出。<br>
+于是作者提出了加入spatiotemporal memory flow的ConvLSTM结构：<br>
+<img src="https://yczzc.github.io/post-images/1587201494696.png" alt="" loading="lazy"></p>
+<p>公式化形式为，其中的M为cell state，即c：<br>
+<img src="https://yczzc.github.io/post-images/1587201564661.png" alt="" loading="lazy"></p>
+<p>但是仅采用竖直方向上的spatiotemporal memory flow会损失时序连贯性(temporal<br>
+coherency)并且容易梯度消失，于是作者提出了另外一种结构：<br>
+<img src="https://yczzc.github.io/post-images/1587201891991.png" alt="" loading="lazy"><br>
+公式化表示为：<br>
+<img src="https://yczzc.github.io/post-images/1587202093263.png" alt="" loading="lazy"></p>
+<p>这里可以看出M就是h和c的的结合。</p>
+<p><strong>PredRNN++: Towards A Resolution of the Deep-in-Time Dilemma in Spatiotemporal Predictive</strong><a href="https://arxiv.org/pdf/1804.06300.pdf">链接</a><br>
+PredRNN++是ICML 2018上的论文，对于前作PredRNN提出的Spatiotemporal LSTM结构进行了改进，提出Casual LSTM结构，并加入Gradient Highway Unit减缓梯度消失问题。<br>
+<img src="https://yczzc.github.io/post-images/1587202701143.png" alt="" loading="lazy"><br>
+<img src="https://yczzc.github.io/post-images/1587202727798.png" alt="" loading="lazy"></p>
+<p>Gradient Highway Unit：<br>
+<img src="https://yczzc.github.io/post-images/1587202904646.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="1"><img src="https://yczzc.github.io/post-images/1587202942318.png" alt="" loading="lazy"></figure>
+<p>参考：</p>
+<ol>
+<li>https://arxiv.org/pdf/1506.04214.pdf</li>
+<li>https://papers.nips.cc/paper/6689-predrnn-recurrent-neural-networks-for-predictive-learning-using-spatiotemporal-lstms.pdf</li>
+<li>https://arxiv.org/pdf/1804.06300.pdf</li>
+</ol>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Capsule Network]]></title>
         <id>https://yczzc.github.io/post/capsule-network/</id>

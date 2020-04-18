@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>ConvLSTM PredRNN 和 PredRNN++ | yczzc</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://yczzc.github.io/favicon.ico?v=1587202971785">
+<link rel="stylesheet" href="https://yczzc.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting链接
+ConvLSTM是2015 NIPS上的论文，研究的问题是降雨预测..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://yczzc.github.io">
+        <img src="https://yczzc.github.io/images/avatar.png?v=1587202971785" class="site-logo">
+        <h1 class="site-title">yczzc</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://yczzc.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">ConvLSTM PredRNN 和 PredRNN++</h2>
+            <div class="post-date">2020-04-18</div>
+            
+            <div class="post-content" v-pre>
+              <p><strong>Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting</strong><a href="https://arxiv.org/pdf/1506.04214.pdf">链接</a><br>
+ConvLSTM是2015 NIPS上的论文，研究的问题是降雨预测。<br>
+降雨预测问题是一个时空序列问题，与当前空间信息有关，也和历史信息有关；因此，作者用卷积运算代替Vanilla LSTM(FC-LSTM)中的普通点积；</p>
+<p>FC-LSTM的公式化形式：<br>
+<img src="https://yczzc.github.io/post-images/1587198913771.png" alt="" loading="lazy"></p>
+<p>ConvLSTM的公式化形式（*表示卷积运算）：<br>
+<img src="https://yczzc.github.io/post-images/1587198953111.png" alt="" loading="lazy"></p>
+<p>此外，论文中采用Encoding-Forecasting Structure将多层ConvLSTM堆叠：<br>
+<img src="https://yczzc.github.io/post-images/1587199798278.png" alt="" loading="lazy"><br>
+在Encoding-Forecasting Structure中，预测网络的h和c取自编码网络最后一个状态；为了保证预测值和输入值维度相同，将预测网络所有状态concatenate后会有一个1*1卷积的操作。</p>
+<p><strong>PredRNN: Recurrent Neural Networks for Predictive Learning using Spatiotemporal LSTMs</strong><a href="https://papers.nips.cc/paper/6689-predrnn-recurrent-neural-networks-for-predictive-learning-using-spatiotemporal-lstms.pdf">链接</a><br>
+PredRNN是2017 NIPS的论文，提出了处理时空信息的 Spatiotemporal LSTM。<br>
+作者认为时空记忆信息(memory states)不应该仅限于cell，提出用多层的结构学得memory<br>
+states。</p>
+<p>作者认为ConvLSTM中的多层结构编码了空间信息，但是导致每一层的cell相互独立，因此下一个时间点最底层ConvLSTM的输入不会考虑上一个时间点最高层ConvLSTM的输出。<br>
+于是作者提出了加入spatiotemporal memory flow的ConvLSTM结构：<br>
+<img src="https://yczzc.github.io/post-images/1587201494696.png" alt="" loading="lazy"></p>
+<p>公式化形式为，其中的M为cell state，即c：<br>
+<img src="https://yczzc.github.io/post-images/1587201564661.png" alt="" loading="lazy"></p>
+<p>但是仅采用竖直方向上的spatiotemporal memory flow会损失时序连贯性(temporal<br>
+coherency)并且容易梯度消失，于是作者提出了另外一种结构：<br>
+<img src="https://yczzc.github.io/post-images/1587201891991.png" alt="" loading="lazy"><br>
+公式化表示为：<br>
+<img src="https://yczzc.github.io/post-images/1587202093263.png" alt="" loading="lazy"></p>
+<p>这里可以看出M就是h和c的的结合。</p>
+<p><strong>PredRNN++: Towards A Resolution of the Deep-in-Time Dilemma in Spatiotemporal Predictive</strong><a href="https://arxiv.org/pdf/1804.06300.pdf">链接</a><br>
+PredRNN++是ICML 2018上的论文，对于前作PredRNN提出的Spatiotemporal LSTM结构进行了改进，提出Casual LSTM结构，并加入Gradient Highway Unit减缓梯度消失问题。<br>
+<img src="https://yczzc.github.io/post-images/1587202701143.png" alt="" loading="lazy"><br>
+<img src="https://yczzc.github.io/post-images/1587202727798.png" alt="" loading="lazy"></p>
+<p>Gradient Highway Unit：<br>
+<img src="https://yczzc.github.io/post-images/1587202904646.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="1"><img src="https://yczzc.github.io/post-images/1587202942318.png" alt="" loading="lazy"></figure>
+<p>参考：</p>
+<ol>
+<li>https://arxiv.org/pdf/1506.04214.pdf</li>
+<li>https://papers.nips.cc/paper/6689-predrnn-recurrent-neural-networks-for-predictive-learning-using-spatiotemporal-lstms.pdf</li>
+<li>https://arxiv.org/pdf/1804.06300.pdf</li>
+</ol>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://yczzc.github.io/post/capsule-network/">
+                  <h3 class="post-title">
+                    Capsule Network
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
